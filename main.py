@@ -9,42 +9,38 @@ from config import Config
 def main():
   config = Config()
   parser = argparse.ArgumentParser(
-    description='Code for filtering methods in: arxiv.org/abs/1905.05471. ' +
-                'These arguments can also be set in config.py, ' +
-                'and will be saved to the output directory.')
-  parser.add_argument('-d', '--data_dir', default=config.data_dir,
-                      help='Directory containing the dataset in these files:' +
-                      ' (trainSource.txt, trainTarget.txt, devSource.txt, ' +
-                      'devTarget.txt, testSource.txt, testTarget.txt, ' +
-                      'vocab.txt)',
+    description='Code for evaluating dialog models\' responses with' +
+                '17 evaluation metrics (arxiv.org/abs/1905.05471)')
+  parser.add_argument('-tns', '--train_source', default=config.train_source,
+                      help='Path to the train source file, where each line ' +
+                      'corresponds to one train input',
                       metavar='')
-  parser.add_argument('-o', '--output_dir', default=config.output_dir,
-                      help='Save here the filtered data and any output',
+  parser.add_argument('-tts', '--test_source', default=config.test_source,
+                      help='Path to the test source file, where each line ' +
+                      'corresponds to one test input',
                       metavar='')
-  parser.add_argument('-l', '--load_config', default=config.load_config,
-                      help='Path to load config from file, or leave empty ' +
-                      '(default: %(default)s)',
+  parser.add_argument('-ttt', '--test_target', default=config.test_target,
+                      help='Path to the test target file, where each line ' +
+                      'corresponds to one test target',
                       metavar='')
-  parser.add_argument('-fs', '--filter_split', default=config.filter_split,
-                      help='Data split to filter, \'full\' filters ' +
-                      'all splits (choices: %(choices)s)',
-                      metavar='', choices=['full', 'train', 'dev', 'test'])
-  parser.add_argument('-ct', '--cluster_type', default=config.cluster_type,
-                      help='Clustering method (choices: %(choices)s)',
+  parser.add_argument('-r', '--test_responses', default=config.test_responses,
+                      help='Path to the test model responses file',
+                      metavar='')
+  parser.add_argument('-tv', '--text_vocab', default=config.text_vocab,
+                      help='A file where each line is a word in the vocab',
+                      metavar='')
+  parser.add_argument('-vv', '--vector_vocab', default=config.vector_vocab,
+                      help='A file where each line is a word in the vocab ' +
+                      'followed by a vector',
+                      metavar='')
+  parser.add_argument('-s', '--bleu_smoothing', default=config.bleu_smoothing,
+                      help='Bleu smoothing method (choices: %(choices)s)',
                       metavar='',
-                      choices=['identity', 'avg_embedding', "sent2vec"])
-  parser.add_argument('-sc', '--source_clusters',
-                      default=config.source_clusters,
-                      help='Number of source clusters in case of Kmeans',
-                      metavar='', type=int)
-  parser.add_argument('-tc', '--target_clusters',
-                      default=config.target_clusters,
-                      help='Number of target clusters in case of Kmeans',
-                      metavar='', type=int)
-  parser.add_argument('-u', '--unique', default=config.unique,
-                      help='Whether to cluster only unique sentences ' +
+                      choices=[0, 1, 2, 3, 4, 5, 6, 7])
+  parser.add_argument('-t', '--t', default=config.t,
+                      help='t value for confidence level calculation ' +
                       '(default: %(default)s)',
-                      metavar='', type=bool)
+                      metavar='', type=int)
 
   parser.parse_args(namespace=config)
 
