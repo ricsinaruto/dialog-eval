@@ -36,9 +36,12 @@ python main.py -h
 For the complete documentation visit the [wiki](https://github.com/ricsinaruto/dialog-eval/wiki).
 
 ### Input format
+You should provide as many of the argument paths required (image above) as possible. If you miss some the program will still run, but it will not compute some metrics which require those files (it will print these metrics). If you have a training data file the program can automatically generate a vocabulary and download fastText embeddings.  
+  
+If you don't want to compute all the metrics you can set which metrics should be computed in the [config](https://github.com/ricsinaruto/dialog-eval/blob/master/utils/config.py) file very easily.
 
 ### Saving format
-
+A file will be saved to the directory where the response file(s) is. The first row contains the names of the metrics, then each row contains the metrics for one file. The name of the file is followed by the individual metric values separated by spaces. Each metric consists of three numbers separated by commas: the mean, standard deviation, and confidence interval. You can set the t value of the confidence interval in the arguments, the default is for 95% confidence.
 
 ## Results & Examples
 
