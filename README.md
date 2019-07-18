@@ -9,14 +9,14 @@ A lightweight repo for automatic evaluation of dialog models using **17 metrics*
   :warning: &nbsp; The program warns you if some files required to compute specific metrics are missing  
   
 ### Metrics
-* Response length: Number of words in the response.
-* Per-word entropy: Probabilities of words are calculated based on frequencies observed in the training data. Entropy at the bigram level is also computed.
-* Utterance entropy: The product of per-word entropy and the response length. Also computed at the bigram level.
-* KL divergence: Measures how well the word distribution of the model responses approximates the ground truth distribution. Also computed at the bigram level (with bigram distributions).
-* Embedding: Embedding *average*, *extrema*, and *greedy* are measured. *average* measure the cosine similarity between the averages of word vectors of response and target utterances. *extrema* constructs a representation by taking the greatest absolute value for each dimension among the word vectors in the response and target utterances and measures the cosine similarity between them. *greedy* matches each response token to a target token (and vica versa) based on the cosine similarity between their ebeddings and averages the total score across all words. 
-* Coherence: Cosine similarity of input and response representations (constructed with the average word embedding method).
-* Distinct: Distinct-1 and distinct-2 measure the ratio of unique unigrams/bigrams to the total number of unigrams/bigrams in a set of responses.
-* BLEU: Measures n-gram overlap between response and target. n = [1,2,3,4]. Smoothing method can be choosen in the arguments.
+* **Response length**: Number of words in the response.
+* **[Per-word entropy](http://www.cs.toronto.edu/~lcharlin/papers/vhred_aaai17.pdf)**: Probabilities of words are calculated based on frequencies observed in the training data. Entropy at the bigram level is also computed.
+* **[Utterance entropy](http://www.cs.toronto.edu/~lcharlin/papers/vhred_aaai17.pdf)**: The product of per-word entropy and the response length. Also computed at the bigram level.
+* **[KL divergence](https://arxiv.org/abs/1905.05471)**: Measures how well the word distribution of the model responses approximates the ground truth distribution. Also computed at the bigram level (with bigram distributions).
+* **[Embedding](https://aclweb.org/anthology/D16-1230)**: Embedding *average*, *extrema*, and *greedy* are measured. *average* measure the cosine similarity between the averages of word vectors of response and target utterances. *extrema* constructs a representation by taking the greatest absolute value for each dimension among the word vectors in the response and target utterances and measures the cosine similarity between them. *greedy* matches each response token to a target token (and vica versa) based on the cosine similarity between their ebeddings and averages the total score across all words. 
+* **[Coherence](https://arxiv.org/pdf/1809.06873.pdf)**: Cosine similarity of input and response representations (constructed with the average word embedding method).
+* **[Distinct](https://www.aclweb.org/anthology/N16-1014)**: Distinct-1 and distinct-2 measure the ratio of unique unigrams/bigrams to the total number of unigrams/bigrams in a set of responses.
+* **[BLEU](https://www.aclweb.org/anthology/P02-1040)**: Measures n-gram overlap between response and target (n = [1,2,3,4]). Smoothing method can be choosen in the arguments.
 
 
 
