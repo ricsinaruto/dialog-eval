@@ -272,6 +272,5 @@ class Metrics:
 
             # Write the metric to file.
             m = str(avg) + ',' + str(std) + ',' + str(confidence)
-            print(m)
             output.write(m + ' ')
         output.write('\n')
