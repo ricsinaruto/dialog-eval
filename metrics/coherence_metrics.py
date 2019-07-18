@@ -4,13 +4,20 @@ from scipy.spatial import distance
 from metrics.embedding_metrics import EmbeddingMetrics
 
 
+# https://arxiv.org/pdf/1809.06873.pdf
 class CoherenceMetrics(EmbeddingMetrics):
   def __init__(self, *args, **kwargs):
     super().__init__(*args, **kwargs)
     self.metrics = {'coherence': []}
 
-  # Calculate embedding metrics.
+  # Calculate coherence for one example.
   def update_metrics(self, resp_words, gt_words, source_words):
+    '''
+    Params:
+      :resp_words: Response word list.
+      :gt_words: Ground truth word list.
+      :source_words: Source word list.
+    '''
     avg_source = self.avg_embedding(source_words)
     avg_resp = self.avg_embedding(resp_words)
 

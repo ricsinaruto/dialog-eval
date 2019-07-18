@@ -1,0 +1,5 @@
+numpy
+scipy
+clint
+requests
+nltk

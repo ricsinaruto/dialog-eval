@@ -1,8 +1,13 @@
 from nltk.translate import bleu_score
 
 
+# https://www.aclweb.org/anthology/P02-1040
 class BleuMetrics():
   def __init__(self, smoothing):
+    '''
+    Params:
+      :smoothing: Smoothing method for bleu.
+    '''
     self.metrics = {'bleu-1': [], 'bleu-2': [], 'bleu-3': [], 'bleu-4': []}
     self.smoothing = [bleu_score.SmoothingFunction().method0,
                       bleu_score.SmoothingFunction().method1,
@@ -14,7 +19,14 @@ class BleuMetrics():
                       bleu_score.SmoothingFunction().method7]
     self.smoothing = self.smoothing[smoothing]
 
+  # Calculate metrics for one example.
   def update_metrics(self, resp, gt, source):
+    '''
+    Params:
+      :resp: Response word list.
+      :gt: Ground truth word list.
+      :source: Source word list.
+    '''
     try:
       self.metrics['bleu-1'].append(
         bleu_score.sentence_bleu([gt], resp, weights=(1, 0, 0, 0),

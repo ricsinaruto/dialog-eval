@@ -1,10 +1,10 @@
-# Converts frequency dict to probabilities
+# Converts frequency dict to probabilities.
 def convert_to_probs(freq_dict):
   num_words = sum(list(freq_dict.values()))
   return dict([(key, val / num_words) for key, val in freq_dict.items()])
 
 
-# Go through the train file and build word and bigram frequencies.
+# Go through a file and build word and bigram frequencies.
 def build_distro(vocab, distro, path, probs=False):
   with open(path) as file:
     for line in file:

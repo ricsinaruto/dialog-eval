@@ -1,11 +1,17 @@
 import numpy as np
-
 from scipy.spatial import distance
 
 
-# A helper class for embedding similarity metrics.
+# https://aclweb.org/anthology/D16-1230
 class EmbeddingMetrics():
   def __init__(self, vocab, distro, emb_dim, average=True):
+    '''
+    Params:
+      :vocab: Vocabulary dictionary.
+      :ditro: Train distribution.
+      :emb_dim: Embedding dimension for word vectors.
+      :average: Whether embedding-average should be computed.
+    '''
     self.vocab = vocab
     self.emb_dim = emb_dim
     self.distro = distro
@@ -17,6 +23,12 @@ class EmbeddingMetrics():
 
   # Calculate embedding metrics.
   def update_metrics(self, resp_words, gt_words, source_words):
+    '''
+    Params:
+      :resp_words: Response word list.
+      :gt_words: Ground truth word list.
+      :source_words: Source word list.
+    '''
     if self.average:
       avg_resp = self.avg_embedding(resp_words)
       avg_gt = self.avg_embedding(gt_words)

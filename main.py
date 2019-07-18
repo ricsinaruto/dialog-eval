@@ -1,15 +1,14 @@
-import sys
 import argparse
 
 
 from metrics.metrics import Metrics
-from config import Config
+from utils.config import Config
 
 
 def main():
   config = Config()
   parser = argparse.ArgumentParser(
-    description='Code for evaluating dialog models\' responses with' +
+    description='Code for evaluating dialog models\' responses with ' +
                 '17 evaluation metrics (arxiv.org/abs/1905.05471)')
   parser.add_argument('-tns', '--train_source', default=config.train_source,
                       help='Path to the train source file, where each line ' +

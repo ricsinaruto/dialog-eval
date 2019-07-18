@@ -3,8 +3,14 @@ import math
 from utils import utils
 
 
+# https://arxiv.org/abs/1905.05471
 class DivergenceMetrics():
   def __init__(self, vocab, gt_path):
+    '''
+    Params:
+      :vocab: Vocabulary dictionary.
+      :gt_path: Path to ground truth file.
+    '''
     self.vocab = vocab
     self.gt_path = gt_path
 
@@ -13,6 +19,12 @@ class DivergenceMetrics():
 
   # Calculate kl divergence between between two distributions for a sentence.
   def update_metrics(self, resp, gt_words, source):
+    '''
+    Params:
+      :resp_words: Response word list.
+      :gt_words: Ground truth word list.
+      :source_words: Source word list.
+    '''
     uni_div = []
     bi_div = []
     word_count = len(gt_words)
@@ -36,7 +48,12 @@ class DivergenceMetrics():
     if bi_div:
       self.metrics['bigram-kl-div'].append(sum(bi_div) / len(bi_div))
 
+  # Get the distributions for test and ground truth data.
   def setup(self, filename):
+    '''
+    Params:
+      :filename: Path to test responses.
+    '''
     self.test_distro = {'uni': {}, 'bi': {}}
     self.gt_distro = {'uni': {}, 'bi': {}}
     utils.build_distro(self.vocab, self.test_distro, filename)
@@ -52,6 +69,11 @@ class DivergenceMetrics():
 
   # Filter test and ground truth distributions, only keep intersection.
   def filter_distros(self, test, true):
+    '''
+    Params:
+      :test: Test distribution.
+      :true: Ground truth distribution.
+    '''
     intersection = set.intersection(set(test.keys()), set(true.keys()))
 
     def probability_distro(distro):

@@ -62,15 +62,15 @@ class Metrics:
 
     # Check which metrics we can compute.
     if not os.path.exists(self.train_source):
-      print('Can\'t find train data at' + self.train_source +
+      print('Can\'t find train data at ' + self.train_source +
             ', entropy metrics and \'embedding-average\' won\'t be computed.')
       self.delete_from_metrics(['entropy', 'average', 'coherence'])
     if not os.path.exists(self.test_source):
-      print('Can\' find test sources at' + self.test_source +
+      print('Can\' find test sources at ' + self.test_source +
         ', \'coherence\' won\'t be computed.')
       self.delete_from_metrics(['coherence'])
     if not os.path.exists(self.test_target):
-      print('Can\' find test targets at' + self.test_target +
+      print('Can\' find test targets at ' + self.test_target +
         ', embedding, kl divergence, and bleu metrics won\'t be computed.')
       self.delete_from_metrics(['kl-div', 'embedding', 'bleu'])
     if not os.path.exists(self.vector_vocab):
@@ -97,6 +97,7 @@ class Metrics:
       utils.build_distro(self.vocab, self.distro, self.train_source, True)
 
     self.objects = {}
+    self.objects['distinct'] = DistinctMetrics(self.vocab)
     # Initialize metric objects.
     if self.these_metrics('entropy'):
       self.objects['entropy'] = EntropyMetrics(self.vocab, self.distro)
@@ -112,8 +113,6 @@ class Metrics:
     if self.these_metrics('coherence'):
       self.objects['coherence'] = CoherenceMetrics(
         self.vocab, self.distro['uni'], self.emb_dim)
-    if self.these_metrics('distinct'):
-      self.objects['distinct'] = DistinctMetrics(self.vocab)
     if self.these_metrics('bleu'):
       self.objects['bleu'] = BleuMetrics(config.bleu_smoothing)
 
@@ -155,9 +154,9 @@ class Metrics:
 
     with open(self.text_vocab, 'w') as file:
       with open(self.train_source) as in_file:
-        vocab.extend(in_file.split())
-      file.write('\n'.join(
-        [w[0] for w in Counter(vocab)]))
+        for line in in_file:
+          vocab.extend(line.split())
+      file.write('\n'.join(list(Counter(vocab))))
 
   # Download FastText word embeddings.
   def get_fast_text_embeddings(self):
@@ -195,9 +194,9 @@ class Metrics:
         if metric in key:
           self.which_metrics[key] = 0
 
-  # Count words, load vocab files and build distributions.
+  # Build a vocabulary.
   def build_vocab(self):
-    # Build the word vectors.
+    # Build the word vectors if possible.
     try:
       with open(self.vector_vocab) as file:
         for line in file:
@@ -215,10 +214,11 @@ class Metrics:
         if not self.vocab.get(line):
           self.vocab[line] = [np.zeros(self.emb_dim)]
 
-  # Compute all metrics.
+  # Compute all metrics for all files.
   def run(self):
     for filename in self.metrics:
       responses = open(filename)
+      # If we don't need these just open a dummy file.
       sources = open(self.test_source) \
         if os.path.exists(self.test_source) else open(filename)
       gt_responses = open(self.test_target) \
@@ -226,7 +226,8 @@ class Metrics:
 
       # Some metrics require pre-computation.
       self.objects['distinct'].calculate_metrics(filename)
-      self.objects['divergence'].setup(filename)
+      if self.objects.get('divergence'):
+        self.objects['divergence'].setup(filename)
 
       # Loop through the test and ground truth responses, calculate metrics.
       for source, response, target in zip(sources, responses, gt_responses):
@@ -242,6 +243,7 @@ class Metrics:
       gt_responses.close()
       responses.close()
 
+      # Save individual metrics to self.metrics
       for key in self.objects:
         for metric_name, metric in self.objects[key].metrics.items():
           self.metrics[filename][metric_name] = list(metric)
@@ -249,13 +251,16 @@ class Metrics:
 
     self.write_metrics()
 
-  # Compute mean, std and confidence, and write all metrics to output files.
+  # Compute mean, std and confidence, and write all metrics to output file.
   def write_metrics(self):
     with open(self.output_path, 'w') as output:
       output.write('filename ')
       output.write(' '.join([k for k, v in self.which_metrics.items() if v]))
       output.write('\n')
 
+      ''' The first row contains the names of the metrics, then each row
+      contains the name of the file and its metrics separated by spaces.
+      Each metric contains 3 numbers separated by ',': mean,std,confidence. '''
       for filename, metrics in self.metrics.items():
         output.write(filename.split('/')[-1] + ' ')
         for metric_name, metric in metrics.items():

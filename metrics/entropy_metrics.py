@@ -1,9 +1,14 @@
 import math
 
 
-# A helper class for entropy-based metrics.
+# http://www.cs.toronto.edu/~lcharlin/papers/vhred_aaai17.pdf
 class EntropyMetrics():
   def __init__(self, vocab, distro):
+    '''
+    Params:
+      :vocab: Vocabulary dictionary.
+      :ditro: Train distribution.
+    '''
     self.vocab = vocab
     self.distro = distro
 
@@ -12,7 +17,14 @@ class EntropyMetrics():
                     'utterance-unigram-entropy': [],
                     'utterance-bigram-entropy': []}
 
+  # Update metrics for one example.
   def update_metrics(self, resp_words, gt_words, source_words):
+    '''
+    Params:
+      :resp_words: Response word list.
+      :gt_words: Ground truth word list.
+      :source_words: Source word list.
+    '''
     uni_entropy = []
     bi_entropy = []
     word_count = len(resp_words)
