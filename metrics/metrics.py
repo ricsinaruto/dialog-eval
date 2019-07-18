@@ -83,12 +83,10 @@ class Metrics:
         self.delete_from_metrics(['coherence', 'embedding'])
     if not os.path.exists(self.text_vocab):
       print('No vocab file named \'vocab.txt\' found in ' + self.text_vocab)
-      try:
+      if os.path.exists(self.train_source):
         print('Building vocab from data.')
         self.text_vocab = os.path.join(self.input_dir, 'vocab.txt')
         self.get_vocab()
-      except FileNotFoundError:
-        pass
 
     # Build vocab and train data distribution if needed.
     if os.path.exists(self.text_vocab):
