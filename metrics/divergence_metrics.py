@@ -56,8 +56,8 @@ class DivergenceMetrics():
     '''
     self.test_distro = {'uni': {}, 'bi': {}}
     self.gt_distro = {'uni': {}, 'bi': {}}
-    utils.build_distro(self.vocab, self.test_distro, filename)
-    utils.build_distro(self.vocab, self.gt_distro, self.gt_path)
+    utils.build_distro(self.test_distro, filename, self.vocab)
+    utils.build_distro(self.gt_distro, self.gt_path, self.vocab)
 
     # Only keep intersection of test and ground truth distros.
     test, true = self.filter_distros(self.test_distro['uni'],

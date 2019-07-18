@@ -62,8 +62,8 @@ class Metrics:
 
     # Check which metrics we can compute.
     if not os.path.exists(self.train_source):
-      print('Can\'t find train data at ' + self.train_source +
-            ', entropy metrics and \'embedding-average\' won\'t be computed.')
+      print('Can\'t find train data at ' + self.train_source + ', entropy ' +
+        'metrics, \'coherence\' and \'embedding-average\' won\'t be computed.')
       self.delete_from_metrics(['entropy', 'average', 'coherence'])
     if not os.path.exists(self.test_source):
       print('Can\' find test sources at ' + self.test_source +
@@ -94,7 +94,7 @@ class Metrics:
     if os.path.exists(self.text_vocab):
       self.build_vocab()
     if os.path.exists(self.train_source):
-      utils.build_distro(self.vocab, self.distro, self.train_source, True)
+      utils.build_distro(self.distro, self.train_source, self.vocab, True)
 
     self.objects = {}
     self.objects['distinct'] = DistinctMetrics(self.vocab)

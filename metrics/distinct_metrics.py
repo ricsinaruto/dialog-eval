@@ -19,7 +19,7 @@ class DistinctMetrics():
   # Calculate distinct metrics for a given file.
   def calculate_metrics(self, filename):
     test_distro = {'uni': {}, 'bi': {}}
-    utils.build_distro(self.vocab, test_distro, filename)
+    utils.build_distro(test_distro, filename, self.vocab)
 
     self.metrics['distinct-1'].append(self.distinct(test_distro['uni']))
     self.metrics['distinct-2'].append(self.distinct(test_distro['bi']))

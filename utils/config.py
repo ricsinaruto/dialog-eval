@@ -2,7 +2,7 @@
 class Config:
   bleu_smoothing = 4  # Smoothing method for bleu calculation.
   t = 1.97  # t value for confidence level calculation
-  train_source = 'data/DailyDialog/baseline/trainSource.txt'
+  train_source = 'data/DailyDlog/baseline/trainSource.txt'
   test_source = 'data/DailyDialog/baseline/testSource.txt'
   test_target = 'data/DailyDialog/baseline/testTarget.txt'
   text_vocab = 'data/DailyDialog/baseline/vocab.txt'
