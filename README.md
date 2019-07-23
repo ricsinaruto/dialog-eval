@@ -44,10 +44,21 @@ If you don't want to compute all the metrics you can set which metrics should be
 A file will be saved to the directory where the response file(s) is. The first row contains the names of the metrics, then each row contains the metrics for one file. The name of the file is followed by the individual metric values separated by spaces. Each metric consists of three numbers separated by commas: the mean, standard deviation, and confidence interval. You can set the t value of the confidence interval in the arguments, the default is for 95% confidence.
 
 ## Results & Examples
+### [Transformer](https://arxiv.org/abs/1706.03762) trained on [DailyDialog](https://arxiv.org/abs/1710.03957)
+Interestingly all 17 metrics improve until a certain point and then stagnate with no overfitting occuring during the training of a Transformer model on DailyDialog. Check the appendix of the [paper](https://arxiv.org/pdf/1905.05471.pdf) for figures.  
+<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/dailydialog_metrics.png" align="top" height="110" ></a>  
+TRF is the Transformer model evaluated at the validation loss minimum and TRF-O is the Transformer model evaluated after 150 epochs of training, where the metrics start stagnating. RT means randomly selected responses from the training set and GT means ground truth responses.  
 
+### [Transformer](https://arxiv.org/abs/1706.03762) trained on [Cornell](https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html)
+<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/cornell_metrics.png" align="top" height="100" ></a>  
+TRF is the Transformer model, while RT means randomly selected responses from the training set and GT means ground truth responses. These results are on measured on the test set at a checkpoint where the validation loss was minimal.  
+
+### [Transformer](https://arxiv.org/abs/1706.03762) trained on [Twitter](https://github.com/facebookresearch/ParlAI/tree/master/parlai/tasks/twitter)
+<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/twitter_metrics.png" align="top" height="90" ></a>  
+TRF is the Transformer model, while RT means randomly selected responses from the training set and GT means ground truth responses. These results are on measured on the test set at a checkpoint where the validation loss was minimal.  
 
 ## Contributing
-##### Check the [issues](https://github.com/ricsinaruto/Seq2seqChatbots/issues) for some additions where help is appreciated. Any contributions are welcome :heart:
+##### Check the [issues](https://github.com/ricsinaruto/dialog-eval/issues) for some additions where help is appreciated. Any contributions are welcome :heart:
 ##### Please try to follow the code syntax style used in the repo (flake8, 2 spaces indent, 80 char lines, commenting a lot, etc.)
 
 
@@ -55,7 +66,7 @@ A file will be saved to the directory where the response file(s) is. The first r
 * **[Richard Csaky](ricsinaruto.github.io)** (If you need any help with running the code: ricsinaruto@hotmail.com)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ricsinaruto/Seq2seqChatbots/blob/master/LICENSE) file for details.  
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ricsinaruto/dialog-eval/blob/master/LICENSE) file for details.  
 Please include a link to this repo if you use it in your work and consider citing the following paper:
 ```
 @article{Csaky:2019,
