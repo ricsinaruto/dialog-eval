@@ -47,12 +47,23 @@ A file will be saved to the directory where the response file(s) is. The first r
 
 
 ## Contributing
+##### Check the [issues](https://github.com/ricsinaruto/Seq2seqChatbots/issues) for some additions where help is appreciated. Any contributions are welcome :heart:
+##### Please try to follow the code syntax style used in the repo (flake8, 2 spaces indent, 80 char lines, commenting a lot, etc.)
+
 
 ## Authors
+* **[Richard Csaky](ricsinaruto.github.io)** (If you need any help with running the code: ricsinaruto@hotmail.com)
 
 ## License
-
-## Acknowledgments
-
-
-##### If you require any help with running the code or if you want the files of the trained models, write to this e-mail address. (ricsinaruto@hotmail.com)
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ricsinaruto/Seq2seqChatbots/blob/master/LICENSE) file for details.  
+Please include a link to this repo if you use it in your work and consider citing the following paper:
+```
+@article{Csaky:2019,
+  title={Improving Neural Conversational Models with Entropy-Based Data Filtering},
+  author={Csaky, Richard and Purgai, Patrik and Recski, Gabor},
+  journal={arXiv preprint arXiv:1905.05471},
+  url={https://arxiv.org/pdf/1905.05471.pdf},
+  year={2019},
+  note={To appear at ACL 2019.}
+}
+```
