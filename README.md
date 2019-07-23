@@ -46,7 +46,7 @@ A file will be saved to the directory where the response file(s) is. The first r
 ## Results & Examples
 ### [Transformer](https://arxiv.org/abs/1706.03762) trained on [DailyDialog](https://arxiv.org/abs/1710.03957)
 Interestingly all 17 metrics improve until a certain point and then stagnate with no overfitting occuring during the training of a Transformer model on DailyDialog. Check the appendix of the [paper](https://arxiv.org/pdf/1905.05471.pdf) for figures.  
-<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/dailydialog_metrics.png" align="top" height="100" ></a>  
+<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/dailydialog_metrics.png" align="top" height="110" ></a>  
 TRF is the Transformer model evaluated at the validation loss minimum and TRF-O is the Transformer model evaluated after 150 epochs of training, where the metrics start stagnating. RT means randomly selected responses from the training set and GT means ground truth responses.  
 
 ### [Transformer](https://arxiv.org/abs/1706.03762) trained on [Cornell](https://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html)
@@ -54,7 +54,7 @@ TRF is the Transformer model evaluated at the validation loss minimum and TRF-O 
 TRF is the Transformer model, while RT means randomly selected responses from the training set and GT means ground truth responses. These results are on measured on the test set at a checkpoint where the validation loss was minimal.  
 
 ### [Transformer](https://arxiv.org/abs/1706.03762) trained on [Twitter](https://github.com/facebookresearch/ParlAI/tree/master/parlai/tasks/twitter)
-<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/twitter_metrics.png" align="top" height="100" ></a>  
+<a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/twitter_metrics.png" align="top" height="90" ></a>  
 TRF is the Transformer model, while RT means randomly selected responses from the training set and GT means ground truth responses. These results are on measured on the test set at a checkpoint where the validation loss was minimal.  
 
 ## Contributing
