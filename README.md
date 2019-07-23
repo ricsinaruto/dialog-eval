@@ -61,6 +61,8 @@ TRF is the Transformer model, while RT means randomly selected responses from th
 ##### Check the [issues](https://github.com/ricsinaruto/dialog-eval/issues) for some additions where help is appreciated. Any contributions are welcome :heart:
 ##### Please try to follow the code syntax style used in the repo (flake8, 2 spaces indent, 80 char lines, commenting a lot, etc.)
 
+**New metrics** can be added by making a class for the metric, which handles the computation of the metric given data. Check [BLEU metrics](https://github.com/ricsinaruto/dialog-eval/blob/master/code/metrics/bleu_metrics.py) for an example. Normally the init function handles any data setup which is needed later, and the update_metrics updates the metrics dict using the current example from the arguments. Inside the class you should define the self.metrics dict, which stores lists of metric values for a given test file. The names of these metrics (keys of the dictionary) should also be added in the config file to self.metrics. Finally you need to add an instance of your metric class to [self.objects](https://github.com/ricsinaruto/dialog-eval/blob/master/code/metrics/metrics.py#L97). Here at initialization you can make use of paths to data files if your metric requires any setup. After this your metric should be automatically computed and saved.  
+However, you should also add some constraints to your metric, e.g. if a file required for the computation of the metric is missing the user should be notified, as [here](https://github.com/ricsinaruto/dialog-eval/blob/master/code/metrics/metrics.py#L64).
 
 ## Authors
 * **[Richard Csaky](ricsinaruto.github.io)** (If you need any help with running the code: ricsinaruto@hotmail.com)
