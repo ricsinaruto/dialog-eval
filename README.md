@@ -29,7 +29,7 @@ pip install -r requirements.txt
 ## Usage
 The main file can be called from anywhere, but when specifying paths to directories you should give them from the root of the repository.
 ```
-python main.py -h
+python code/main.py -h
 ```
 <a><img src="https://github.com/ricsinaruto/dialog-eval/blob/master/docs/help.png" align="top" height="500" ></a>
 
