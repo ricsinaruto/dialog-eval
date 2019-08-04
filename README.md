@@ -1,5 +1,5 @@
 # dialog-eval &middot; [![twitter](https://img.shields.io/twitter/url/https/shields.io.svg?style=social)](https://ctt.ac/a16pa)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Paper](https://img.shields.io/badge/Presented%20at-ACL%202019-yellow.svg)](https://arxiv.org/abs/1905.05471) [![Poster](https://img.shields.io/badge/The-Poster-yellow.svg)](https://ricsinaruto.github.io/website/docs/acl_poster_h.pdf) [![Code1](https://img.shields.io/badge/code-chatbot%20training-green.svg)](https://github.com/ricsinaruto/Seq2seqChatbots) [![Code2](https://img.shields.io/badge/code-filtering-green.svg)](https://github.com/ricsinaruto/NeuralChatbots-DataFiltering) [![documentation](https://img.shields.io/badge/documentation-on%20wiki-red.svg)](https://github.com/ricsinaruto/dialog-eval/wiki)  
+[![Paper](https://img.shields.io/badge/Presented%20at-ACL%202019-yellow.svg)](https://www.aclweb.org/anthology/P19-1567) [![Poster](https://img.shields.io/badge/The-Poster-yellow.svg)](https://ricsinaruto.github.io/website/docs/acl_poster_h.pdf) [![Code1](https://img.shields.io/badge/code-chatbot%20training-green.svg)](https://github.com/ricsinaruto/Seq2seqChatbots) [![Code2](https://img.shields.io/badge/code-filtering-green.svg)](https://github.com/ricsinaruto/NeuralChatbots-DataFiltering) [![documentation](https://img.shields.io/badge/documentation-on%20wiki-red.svg)](https://github.com/ricsinaruto/dialog-eval/wiki) [![blog](https://img.shields.io/badge/Blog-post-black.svg)](https://medium.com/@richardcsaky/neural-chatbots-are-dumb-65b6b40e9bd4)  
 A lightweight repo for automatic evaluation of dialog models using **17 metrics**.
 
 ## Features
@@ -12,7 +12,7 @@ A lightweight repo for automatic evaluation of dialog models using **17 metrics*
 * **Response length**: Number of words in the response.
 * **[Per-word entropy](http://www.cs.toronto.edu/~lcharlin/papers/vhred_aaai17.pdf)**: Probabilities of words are calculated based on frequencies observed in the training data. Entropy at the bigram level is also computed.
 * **[Utterance entropy](http://www.cs.toronto.edu/~lcharlin/papers/vhred_aaai17.pdf)**: The product of per-word entropy and the response length. Also computed at the bigram level.
-* **[KL divergence](https://arxiv.org/abs/1905.05471)**: Measures how well the word distribution of the model responses approximates the ground truth distribution. Also computed at the bigram level (with bigram distributions).
+* **[KL divergence](https://www.aclweb.org/anthology/P19-1567)**: Measures how well the word distribution of the model responses approximates the ground truth distribution. Also computed at the bigram level (with bigram distributions).
 * **[Embedding](https://aclweb.org/anthology/D16-1230)**: Embedding *average*, *extrema*, and *greedy* are measured. *average* measure the cosine similarity between the averages of word vectors of response and target utterances. *extrema* constructs a representation by taking the greatest absolute value for each dimension among the word vectors in the response and target utterances and measures the cosine similarity between them. *greedy* matches each response token to a target token (and vica versa) based on the cosine similarity between their ebeddings and averages the total score across all words. 
 * **[Coherence](https://arxiv.org/pdf/1809.06873.pdf)**: Cosine similarity of input and response representations (constructed with the average word embedding method).
 * **[Distinct](https://www.aclweb.org/anthology/N16-1014)**: Distinct-1 and distinct-2 measure the ratio of unique unigrams/bigrams to the total number of unigrams/bigrams in a set of responses.
@@ -72,12 +72,15 @@ However, you should also add some constraints to your metric, e.g. if a file req
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/ricsinaruto/dialog-eval/blob/master/LICENSE) file for details.  
 Please include a link to this repo if you use it in your work and consider citing the following paper:
 ```
-@article{Csaky:2019,
-  title={Improving Neural Conversational Models with Entropy-Based Data Filtering},
-  author={Csaky, Richard and Purgai, Patrik and Recski, Gabor},
-  journal={arXiv preprint arXiv:1905.05471},
-  url={https://arxiv.org/pdf/1905.05471.pdf},
-  year={2019},
-  note={To appear at ACL 2019.}
+@inproceedings{Csaky:2019,
+    title = "Improving Neural Conversational Models with Entropy-Based Data Filtering",
+    author = "Cs{\'a}ky, Rich{\'a}rd and Purgai, Patrik and Recski, G{\'a}bor",
+    booktitle = "Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics",
+    month = jul,
+    year = "2019",
+    address = "Florence, Italy",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/P19-1567",
+    pages = "5650--5669",
 }
 ```
