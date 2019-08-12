@@ -23,7 +23,7 @@ class Metrics:
       :config: A Config instance containing arguments.
     '''
     self.project_path = os.path.join(
-      os.path.dirname(os.path.abspath(__file__)), '..')
+      os.path.dirname(os.path.abspath(__file__)), '..', '..')
     self.test_responses = os.path.join(self.project_path,
                                        config.test_responses)
 
