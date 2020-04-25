@@ -6,7 +6,7 @@ def convert_to_probs(freq_dict):
 
 # Go through a file and build word and bigram frequencies.
 def build_distro(distro, path, vocab=None, probs=False):
-  with open(path) as file:
+  with open(path, encoding='utf-8') as file:
     for line in file:
       words = line.split()
       word_count = len(words)

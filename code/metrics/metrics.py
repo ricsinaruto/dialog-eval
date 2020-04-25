@@ -168,16 +168,19 @@ class Metrics:
     if not os.path.exists(fasttext_path):
       self.download_fasttext()
 
-    vocab = [line.strip('\n') for line in open(self.text_vocab)]
+    vocab = [line.strip('\n') for line in open(self.text_vocab, encoding='utf-8')]
     self.vector_vocab = os.path.join(self.input_dir, 'vocab.npy')
 
     # Save the vectors for words in the vocab.
-    with open(fasttext_path, errors='ignore') as in_file:
-      with open(self.vector_vocab, 'w') as out_file:
+    with open(fasttext_path, errors='ignore', encoding='utf-8') as in_file:
+      with open(self.vector_vocab, 'w', encoding='utf-8') as out_file:
         vectors = {}
         for line in in_file:
           tokens = line.strip().split()
-          vectors[tokens[0]] = line
+          if len(tokens) == 301:
+            vectors[tokens[0]] = line
+          elif tokens[1] == '»':
+            vectors[tokens[0]] = tokens[0] + ' ' + ' '.join(tokens[2:]) + '\n'
 
         for word in vocab:
           try:
@@ -196,7 +199,7 @@ class Metrics:
   def build_vocab(self):
     # Build the word vectors if possible.
     try:
-      with open(self.vector_vocab) as file:
+      with open(self.vector_vocab, encoding='utf-8') as file:
         for line in file:
           tokens = line.split()
           self.vocab[tokens[0]] = [np.array(list(map(float, tokens[1:])))]
@@ -206,7 +209,7 @@ class Metrics:
       self.emb_dim = 1
 
     # Extend the remaining vocab.
-    with open(self.text_vocab) as file:
+    with open(self.text_vocab, encoding='utf-8') as file:
       for line in file:
         line = line.strip()
         if not self.vocab.get(line):
@@ -215,12 +218,12 @@ class Metrics:
   # Compute all metrics for all files.
   def run(self):
     for filename in self.metrics:
-      responses = open(filename)
+      responses = open(filename, encoding='utf-8')
       # If we don't need these just open a dummy file.
-      sources = open(self.test_source) \
-        if os.path.exists(self.test_source) else open(filename)
-      gt_responses = open(self.test_target) \
-        if os.path.exists(self.test_target) else open(filename)
+      sources = open(self.test_source, encoding='utf-8') \
+        if os.path.exists(self.test_source) else open(filename, encoding='utf-8')
+      gt_responses = open(self.test_target, encoding='utf-8') \
+        if os.path.exists(self.test_target) else open(filename, encoding='utf-8')
 
       # Some metrics require pre-computation.
       self.objects['distinct'].calculate_metrics(filename)
