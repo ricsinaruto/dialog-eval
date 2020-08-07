@@ -1,4 +1,4 @@
-folder = 'data/DailyDialogCurated/'
+folder = 'data/open_gut/en/'
 
 
 # These can also be set as arguments via the command line.
@@ -8,25 +8,26 @@ class Config:
   train_source = folder + 'trainSource.txt'
   test_source = folder + 'testSource.txt'
   test_target = folder + 'testTarget.txt'
-  text_vocab = folder + 'dataset/vocab.txt'
-  vector_vocab = folder + 'dataset/vocab.npy'
-  test_responses = folder + 'gpt2/opensubtitles_transfer/valmin_finetuned_processed.txt'
+  text_vocab = folder + 'vocab.txt'
+  vector_vocab = folder + 'vocab.npy'
+  test_responses = folder + 'responses'
+  lang = 'en'
   metrics = {
-    'length': 1,
-    'per-unigram-entropy': 1,
-    'per-bigram-entropy': 1,
-    'utterance-unigram-entropy': 1,
-    'utterance-bigram-entropy': 1,
-    'unigram-kl-div': 1,
-    'bigram-kl-div': 1,
-    'embedding-average': 1,
-    'embedding-extrema': 1,
-    'embedding-greedy': 1,
-    'coherence': 1,
-    'distinct-1': 1,
-    'distinct-2': 1,
-    'bleu-1': 1,
-    'bleu-2': 1,
-    'bleu-3': 1,
+    'length': 0,
+    'per-unigram-entropy': 0,
+    'per-bigram-entropy': 0,
+    'utterance-unigram-entropy': 0,
+    'utterance-bigram-entropy': 0,
+    'unigram-kl-div': 0,
+    'bigram-kl-div': 0,
+    'embedding-average': 0,
+    'embedding-extrema': 0,
+    'embedding-greedy': 0,
+    'coherence': 0,
+    'distinct-1': 0,
+    'distinct-2': 0,
+    'bleu-1': 0,
+    'bleu-2': 0,
+    'bleu-3': 0,
     'bleu-4': 1
   }

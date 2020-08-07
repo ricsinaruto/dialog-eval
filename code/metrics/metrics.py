@@ -150,8 +150,8 @@ class Metrics:
       print('No train data, can\'t build vocab file.')
       sys.exit()
 
-    with open(self.text_vocab, 'w') as file:
-      with open(self.train_source) as in_file:
+    with open(self.text_vocab, 'w', encoding='utf-8') as file:
+      with open(self.train_source, encoding='utf-8') as in_file:
         for line in in_file:
           vocab.extend(line.split())
       file.write('\n'.join(list(Counter(vocab))))
@@ -164,7 +164,7 @@ class Metrics:
       self.text_vocab = os.path.join(self.input_dir, 'vocab.txt')
       self.get_vocab()
 
-    fasttext_path = os.path.join(self.input_dir, 'wiki-news-300d-1M.vec')
+    fasttext_path = os.path.join(self.input_dir, 'cc.' + self.config.lang + '.300.vec')
     if not os.path.exists(fasttext_path):
       self.download_fasttext()
 
